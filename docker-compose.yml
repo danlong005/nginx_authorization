@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  api:
+    build: ./safe_api
+    ports:
+      - "3001:3001"
+    depends_on: 
+      - nginx
+
+  nginx:
+    build: ./nginx
+    ports: 
+      - "8080:80"
+    depends_on: 
+      - auth
+  
+  auth:
+    build: ./auth_api
+    ports:
+      - "3000:3000"
+
