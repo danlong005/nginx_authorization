@@ -8,19 +8,21 @@ is pushed back to the client.
 
 I have set up a simple example
 ```
-        <--------------------------------------------------------------------------------------------------------
-                                                                                                                 |
-Request                                                                                                          |
-GET www.mynginx_server.com/v1/membership ----> NGINX -----------------------------------> Safe_Api/v1/membership   
-Authorization: [some_jwt]                        | ^
-                                                 | |
-                                                 |  -------------------------------------------------------------------
-                                                 |                                                                     | 200
-                                                  -----------------------------------------------> Auth_Api/v1/validate 
-                                            POST Auth_Api                                                          |
-                                            Authorization: [some_jwt]                                              | 401
-                                                                                                                   |
-        <----------------------------------------------------------------------------------------------------------
+        <-------------<-------------<----------<---------<----------<----
+                                                                         |
+                                                                         ^
+Request                                                                  |
+GET nginx/v1/membership ----> NGINX ---->---->-----> Safe_Api/v1/membership   
+Authorization: [some_jwt]       | ^
+                                | |
+                                V  --<-----<------<--------
+                                |                          ^ 200
+                                |                          |
+                                 --->--->--->---> Auth_Api/v1/validate 
+                            POST Auth_Api                           |
+                            Authorization: [some_jwt]               V 401
+                                                                    |
+        <-------<---------<-----------<---------<-------------<-----
 ```
 
 
