@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/v1/membership', (req, res) => {
   res.status(200).json({
     message: "Super Protected"    
   });
